@@ -1,4 +1,8 @@
-function Form() {
+type FormProps = {
+  handleClick: () => void;
+};
+
+function Form({ handleClick }: FormProps) {
   return (
     <form className="form-container">
       <div>
@@ -21,7 +25,7 @@ function Form() {
         <button type="submit" id="sub-button">Cadastrar</button>
       </div>
       <div>
-        <button type="submit" id="cancel-button">Cancelar</button>
+        <button onClick={ handleClick } id="cancel-button">Cancelar</button>
       </div>
     </form>
   );
