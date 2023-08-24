@@ -3,9 +3,10 @@ import { objInput, InputType, verifyInputs } from '../data';
 
 type FormProps = {
   handleClick: () => void;
+  newService: (service: InputType) => void;
 };
 
-function Form({ handleClick }: FormProps) {
+function Form({ handleClick, newService }: FormProps) {
   const [inputData, setInputData] = useState<InputType>(objInput);
 
   const valid = 'valid-password-check';
@@ -66,12 +67,28 @@ function Form({ handleClick }: FormProps) {
       </div>
       <div>
         <label htmlFor="url">URL</label>
-        <input type="text" id="url" placeholder="URL" />
+        <input
+          type="text"
+          name="url"
+          id="url"
+          placeholder="URL"
+          value={ inputData.url }
+          onChange={ handleChange }
+        />
       </div>
       <div>
-        { verifyInputs(inputData)
+        <button
+          disabled={ !verifyInputs(inputData) }
+          onClick={ () => {
+            handleClick();
+            newService(inputData);
+          } }
+        >
+          Cadastrar
+        </button>
+        {/* { verifyInputs(inputData)
           ? <button disabled={ false }>Cadastrar</button>
-          : <button disabled>Cadastrar</button>}
+          : <button disabled>Cadastrar</button>} */}
       </div>
       <div>
         <button onClick={ handleClick } id="cancel-button">Cancelar</button>
