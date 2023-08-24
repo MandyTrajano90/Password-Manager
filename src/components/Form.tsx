@@ -17,7 +17,6 @@ function Form({ handleClick, newService }: FormProps) {
 
   function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
     const { name, value } = event.target;
-    console.log(name);
     setInputData({
       ...inputData,
       [name]: value,
@@ -28,6 +27,9 @@ function Form({ handleClick, newService }: FormProps) {
     event.preventDefault();
   };
 
+  function deletePassword() {
+    setInputData(objInput);
+  }
   return (
     <form onSubmit={ handleSubmit } className="form-container">
       <div>
@@ -82,16 +84,23 @@ function Form({ handleClick, newService }: FormProps) {
           onClick={ () => {
             handleClick();
             newService(inputData);
+            deletePassword();
           } }
         >
           Cadastrar
         </button>
-        {/* { verifyInputs(inputData)
-          ? <button disabled={ false }>Cadastrar</button>
-          : <button disabled>Cadastrar</button>} */}
       </div>
       <div>
-        <button onClick={ handleClick } id="cancel-button">Cancelar</button>
+        <button
+          id="cancel-button"
+          onClick={ () => {
+            handleClick();
+            newService(inputData);
+            deletePassword();
+          } }
+        >
+          Cancelar
+        </button>
       </div>
       <fieldset>
         <div className={ verifyPassword ? valid : inValid }>

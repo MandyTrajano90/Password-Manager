@@ -1,6 +1,11 @@
 import { InputType } from '../data';
 
-function PasswordData({ passwordData }: { passwordData: InputType[] }) {
+type PasswordDataProps = {
+  passwordData: InputType[];
+  deleteService: (param: string) => void;
+};
+
+function PasswordData({ passwordData, deleteService }: PasswordDataProps) {
   return (
     <ul>
       {passwordData.map((password) => (
@@ -10,6 +15,12 @@ function PasswordData({ passwordData }: { passwordData: InputType[] }) {
           </a>
           <p>{ password.login }</p>
           <p>{ password.senha }</p>
+          <button
+            data-testid="remove-btn"
+            onClick={ () => deleteService(password.name) }
+          >
+            Remover
+          </button>
         </li>
       ))}
     </ul>

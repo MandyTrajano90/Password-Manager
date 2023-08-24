@@ -18,6 +18,11 @@ function App() {
     setServlist([...servList, newService]);
   };
 
+  const deletePassword = (name: string) => {
+    const newList = servList.filter((serv) => serv.name !== name);
+    setServlist(newList);
+  };
+
   return (
     <>
       <Title />
@@ -27,7 +32,10 @@ function App() {
       { servList.length === 0 ? (
         <h2>Nenhuma senha cadastrada</h2>
       ) : (
-        <PasswordData passwordData={ servList } />
+        <PasswordData
+          passwordData={ servList }
+          deleteService={ deletePassword }
+        />
       )}
     </>
   );

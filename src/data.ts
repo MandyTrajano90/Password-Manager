@@ -2,7 +2,8 @@ export type InputType = {
   name:string,
   login:string,
   senha:string,
-  url:string
+  url:string,
+  id?: number,
 };
 
 export const objInput: InputType = {
