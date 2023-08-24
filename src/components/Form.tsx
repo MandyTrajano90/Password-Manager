@@ -8,6 +8,12 @@ type FormProps = {
 function Form({ handleClick }: FormProps) {
   const [inputData, setInputData] = useState<InputType>(objInput);
 
+  const valid = 'valid-password-check';
+  const inValid = 'invalid-password-check';
+
+  const regex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[^A-Za-z0-9]).{8,16}$/;
+  const verifyPassword = regex.test(inputData.senha);
+
   function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
     const { name, value } = event.target;
     console.log(name);
@@ -70,6 +76,20 @@ function Form({ handleClick }: FormProps) {
       <div>
         <button onClick={ handleClick } id="cancel-button">Cancelar</button>
       </div>
+      <fieldset>
+        <div className={ verifyPassword ? valid : inValid }>
+          Possuir 8 ou mais caracteres
+        </div>
+        <div className={ verifyPassword ? valid : inValid }>
+          Possuir até 16 caracteres
+        </div>
+        <div className={ verifyPassword ? valid : inValid }>
+          Possuir letras e números
+        </div>
+        <div className={ verifyPassword ? valid : inValid }>
+          Possuir algum caractere especial
+        </div>
+      </fieldset>
     </form>
   );
 }
